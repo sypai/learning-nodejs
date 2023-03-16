@@ -1,10 +1,14 @@
 // load 'chalk'
 const chalk = require('chalk')
 
-const {getNotes} = require('./notes.js')
+// Processing arguments
+args = process.argv // arg vector
+console.log(args)
 
-const notes = getNotes()
-console.log(notes)
+command = args[2]
 
-// Printing 'success'
-console.log(chalk.greenBright.bold('Success'))
+if (command === 'add'){
+    console.log(chalk.bgGrey.whiteBright('Adding note'))
+} else if (command === 'remove'){
+    console.log(chalk.bgGrey.yellowBright('Removing note'))
+}
