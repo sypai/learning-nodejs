@@ -1,14 +1,15 @@
-// load 'chalk'
 const chalk = require('chalk')
+const yargs = require('yargs')
 
-// Processing arguments
-args = process.argv // arg vector
-console.log(args)
+// node app.js add --title='My first note'
 
-command = args[2]
+// [
+//     'C:\\Program Files\\nodejs\\node.exe',
+//     'C:\\Users\\SuyashBajpai\\Desktop\\#Programming\\nodejs\\module1\\notes-app\\app.js',
+//     'add',
+//     '--title=My First note'
+//   ]
+console.log(process.argv)
 
-if (command === 'add'){
-    console.log(chalk.bgGrey.whiteBright('Adding note'))
-} else if (command === 'remove'){
-    console.log(chalk.bgGrey.yellowBright('Removing note'))
-}
+// { _: [ 'add' ], title: 'My First note', '$0': 'app.js' }
+console.log(yargs.argv)
