@@ -1,12 +1,10 @@
-// installed validator, a npm package 
-// npm install validator in root directory 
-const validator = require('validator')
+// load 'chalk'
+const chalk = require('chalk')
 
 const {getNotes} = require('./notes.js')
 
 const notes = getNotes()
 console.log(notes)
 
-// looking at docs and trying out functions
-console.log(validator.isEmail('suyash@ibm.com')) //true
-console.log(validator.isURL('898989898')) //false
+// Printing 'success'
+console.log(chalk.greenBright.bold('Success'))
