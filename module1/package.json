@@ -1,0 +1,14 @@
+{
+  "name": "module1",
+  "version": "1.0.0",
+  "description": "Learning NodeJS",
+  "main": "notes-app/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "sypai",
+  "license": "ISC",
+  "dependencies": {
+    "validator": "^13.9.0"
+  }
+}
