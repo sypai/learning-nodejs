@@ -1,15 +1,40 @@
 const chalk = require('chalk')
 const yargs = require('yargs')
 
-// node app.js add --title='My first note'
+// Create 'add' command
+yargs.command({
+    command: 'add',
+    describe: 'Adding a new note',
+    handler : function () {
+        console.log('Adding a new note')
+    }
+})
 
-// [
-//     'C:\\Program Files\\nodejs\\node.exe',
-//     'C:\\Users\\SuyashBajpai\\Desktop\\#Programming\\nodejs\\module1\\notes-app\\app.js',
-//     'add',
-//     '--title=My First note'
-//   ]
-console.log(process.argv)
+// Create 'remove' command
+yargs.command({
+    command: 'remove',
+    describe: 'Removing a note',
+    handler : function () {
+        console.log('Removing a note')
+    }
+})
 
-// { _: [ 'add' ], title: 'My First note', '$0': 'app.js' }
-console.log(yargs.argv)
+// Create 'list' command
+yargs.command({
+    command: 'list',
+    describe: 'List your notes',
+    handler : function () {
+        console.log('Listing your notes')
+    }
+})
+
+// Create 'read' command
+yargs.command({
+    command: 'read',
+    describe: 'Read a note',
+    handler : function () {
+        console.log('Reading a note')
+    }
+})
+
+yargs.parse()
