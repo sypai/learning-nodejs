@@ -3,6 +3,7 @@ const fs = require('fs')
 const getNotes = function () {
     return 'Your notes...\n'
 }
+// ADD a new note to notes db (json)
 
 const addNotes = function (title, body) {
     
@@ -41,7 +42,38 @@ const loadData = function () {
     }
 }
 
+// REMOVE a note with the given title from notes db
+const remove = function (title){
+    console.log('Removing note with title : | ' + title + ' |')
+    
+    notes = loadData()
+
+    if (notes.length === 0){
+        console.log('You do not have have any notes.')
+        return
+    }
+
+    const checkNotes = notes.filter(function (note) {
+        return note.title === title
+    })
+    
+    if (checkNotes.length === 0){
+        console.log('\nCan not remove note.\nThere is no note with the title | ' + title + ' |\n')
+        return
+    }
+
+    const filteredNotes = notes.filter(function (note) {
+        return note.title !== title
+    })
+    
+    saveNotes(filteredNotes)
+    console.log('Note removed.')
+}
+
 module.exports = { 
     getNotes: getNotes,
-    addNotes: addNotes
+
+    addNotes: addNotes,
+
+    remove: remove
 }
