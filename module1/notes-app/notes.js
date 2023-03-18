@@ -18,7 +18,27 @@ const loadData = () => {
     }
 }
 
-const getNotes = () => 'Your notes...\n'
+const readNotes = (title) => {
+    notes = loadData()
+    requiredNote = notes.find((note) => note.title === title)
+    
+    if (requiredNote){
+        console.log(chalk.inverse("Here's your note\n"))
+        console.log(chalk.bold.underline.cyan(requiredNote.title + '\n'))
+        console.log(chalk.italic(requiredNote.body+ '\n'))
+    }else{
+        console.log(chalk.red('\nThere is no note with the title | ' + title + ' |\n'))
+    }
+}
+
+// LIST all notes from our notes db
+const listNotes = () => {
+    notes = loadData()
+
+    console.log(chalk.bold.cyanBright.underline('Your Notes\n'))
+
+    notes.forEach((note) => console.log(note.title));
+}
 
 // ADD a new note to notes db (json)
 const addNotes = (title, body) => {
@@ -26,9 +46,14 @@ const addNotes = (title, body) => {
     // console.log('Loading data')
     notes = loadData()
 
-    const filteredNotes = notes.filter( (note) => note.title === title)
+    // even if we get a duplicate note, we are checking the rest of the array
+    // which we can skip
     
-    if (filteredNotes.length === 0){
+    // const duplicateNotes = notes.filter( (note) => note.title === title)
+    
+    const duplicateNote = notes.find( (note) => note.title === title)
+
+    if (!duplicateNote){
         notes.push({
             title: title,
             body: body
@@ -67,9 +92,8 @@ const remove = (title) => {
 }
 
 module.exports = { 
-    getNotes: getNotes,
-
+    readNotes: readNotes,
+    listNotes: listNotes,
     addNotes: addNotes,
-
     remove: remove
 }
