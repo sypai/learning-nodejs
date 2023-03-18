@@ -1,19 +1,32 @@
 const fs = require('fs')
 const chalk = require('chalk')
 
-const getNotes = function () {
-    return 'Your notes...\n'
+const saveNotes = (notes) => {
+    const fileData = JSON.stringify(notes)
+    fs.writeFileSync('notes.json', fileData)
 }
 
+const loadData = () => {
+    try{
+        const buffer = fs.readFileSync('notes.json')
+        const fileData = buffer.toString()
+        const jsonData = JSON.parse(fileData)
+        return jsonData
+
+    } catch (e) {
+        return []
+    }
+}
+
+const getNotes = () => 'Your notes...\n'
+
 // ADD a new note to notes db (json)
-const addNotes = function (title, body) {
+const addNotes = (title, body) => {
     
     // console.log('Loading data')
     notes = loadData()
 
-    const filteredNotes = notes.filter(function (note) {
-        return note.title === title
-    })
+    const filteredNotes = notes.filter( (note) => note.title === title)
     
     if (filteredNotes.length === 0){
         notes.push({
@@ -29,25 +42,8 @@ const addNotes = function (title, body) {
     }   
 }
 
-const saveNotes = function (notes){
-    const fileData = JSON.stringify(notes)
-    fs.writeFileSync('notes.json', fileData)
-}
-
-const loadData = function () {
-    try{
-        const buffer = fs.readFileSync('notes.json')
-        const fileData = buffer.toString()
-        const jsonData = JSON.parse(fileData)
-        return jsonData
-
-    } catch (e) {
-        return []
-    }
-}
-
 // REMOVE a note with the given title from notes db
-const remove = function (title){
+const remove = (title) => {
     console.log('\nRemoving note with title : | ' + title + ' |\n')
     
     notes = loadData()
@@ -57,18 +53,14 @@ const remove = function (title){
         return
     }
 
-    const checkNotes = notes.filter(function (note) {
-        return note.title === title
-    })
+    const checkNotes = notes.filter( (note) => note.title === title)
 
     if (checkNotes.length === 0){
         console.log(chalk.bgRed('\nCan not remove note.\nThere is no note with the title | ' + title + ' |\n'))
         return
     }
 
-    const filteredNotes = notes.filter(function (note) {
-        return note.title !== title
-    })
+    const filteredNotes = notes.filter((note) => note.title !== title)
     
     saveNotes(filteredNotes)
     console.log(chalk.bgGreen('Your note has been removed.'))
