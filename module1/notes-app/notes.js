@@ -1,10 +1,11 @@
 const fs = require('fs')
+const chalk = require('chalk')
 
 const getNotes = function () {
     return 'Your notes...\n'
 }
-// ADD a new note to notes db (json)
 
+// ADD a new note to notes db (json)
 const addNotes = function (title, body) {
     
     // console.log('Loading data')
@@ -19,9 +20,12 @@ const addNotes = function (title, body) {
             title: title,
             body: body
         })
+
         saveNotes(notes)
+        console.log(chalk.bgGreen('Your note has been added.'))
+
     }else{
-        console.log('Can not add this note.\nA note with the title | ' + title + ' | already exits.')
+        console.log(chalk.bgRed('Can not add this note.\nA note with the title | ' + title + ' | already exits.'))
     }   
 }
 
@@ -44,21 +48,21 @@ const loadData = function () {
 
 // REMOVE a note with the given title from notes db
 const remove = function (title){
-    console.log('Removing note with title : | ' + title + ' |')
+    console.log('\nRemoving note with title : | ' + title + ' |\n')
     
     notes = loadData()
 
     if (notes.length === 0){
-        console.log('You do not have have any notes.')
+        console.log(chalk.bgYellow('You do not have have any notes.'))
         return
     }
 
     const checkNotes = notes.filter(function (note) {
         return note.title === title
     })
-    
+
     if (checkNotes.length === 0){
-        console.log('\nCan not remove note.\nThere is no note with the title | ' + title + ' |\n')
+        console.log(chalk.bgRed('\nCan not remove note.\nThere is no note with the title | ' + title + ' |\n'))
         return
     }
 
@@ -67,7 +71,7 @@ const remove = function (title){
     })
     
     saveNotes(filteredNotes)
-    console.log('Note removed.')
+    console.log(chalk.bgGreen('Your note has been removed.'))
 }
 
 module.exports = { 
