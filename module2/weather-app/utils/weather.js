@@ -1,21 +1,20 @@
 const request = require('postman-request')
 const chalk =require('chalk')
 
-const weather = (latitude, longitude, callback) => {
-    const url = 'http://api.weatherapi.com/v1/current.json?key=&q=' + latitude + ',' + longitude
+const weather = ({latitude, longitude}, callback) => {
+    const url = 'http://api.weatherapi.com/v1/current.json?key=ac2911ceb99240808f625902232103&q=' + latitude + ',' + longitude
 
-    request({url: url, json: true}, (error, response) => {
+    request({url, json: true}, (error, { body }) => {
     
         if (error){
             callback(chalk.redBright('Unable to connect to the Weather API'), undefined)
         }
         else{
             try{
-                const data = response.body
-                const temp = data.current.temp_c
-                const condition = data.current.condition.text
+                const temp = body.current.temp_c
+                const condition = body.current.condition.text
     
-                callback(undefined, {condition: condition, temperature: temp})
+                callback(undefined, {condition, temp})
             }
             catch(e){
                 console.log(chalk.yellow(e))

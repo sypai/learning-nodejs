@@ -5,19 +5,23 @@ const weather = require('./utils/weather')
 const address = process.argv[2]
 
 if (address){
-    geocode(address, (error, geocode_response) => {
+    geocode(address, (error, { latitude, longitude, name } = {}) => {
+        
         if (error){
             return console.log(error)
         }
         
-        weather(geocode_response.latitude, geocode_response.longitude, (error, weather_response) => {
+        weather({latitude, longitude}, (error, {condition, temp}) => {
+            
             if (error){
                 return console.log(error)
             }
     
-            console.log(chalk.cyan(geocode_response.name))
-            console.log(chalk.cyan('It is ' + chalk.green(weather_response.condition) + ' outside and the temperature is ' + chalk.green(weather_response.temperature + '°C')))
+            console.log(chalk.cyan(name))
+            console.log(chalk.cyan('It is ' + chalk.green(condition) + ' outside and the temperature is ' + chalk.green(temp + '°C')))
+        
         })
+
     }) 
 }
 else{
