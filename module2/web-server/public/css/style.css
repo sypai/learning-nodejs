@@ -1,0 +1,11 @@
+/* 5d5c61, 379683, 7395ae, 557a95, b11a296 */
+@import url('https://fonts.googleapis.com/css2?family=Alkatra:wght@400;500;600&display=swap');
+body{
+    background-color: #557a95;
+}
+
+h1{
+    font-family: 'Alakatra', cursive;
+    font-style: italic;
+    color: #fff;
+}
