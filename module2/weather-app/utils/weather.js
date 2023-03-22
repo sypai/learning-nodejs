@@ -18,6 +18,7 @@ const weather = (latitude, longitude, callback) => {
                 callback(undefined, {condition: condition, temperature: temp})
             }
             catch(e){
+                console.log(chalk.yellow(e))
                 callback(chalk.redBright('Unable to fetch data from Weather API'), undefined)
             }
         }

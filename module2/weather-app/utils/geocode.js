@@ -1,10 +1,9 @@
 const request = require('postman-request')
 const chalk = require('chalk')
 
-const geocode = (address,callback) => {
+const geocode = (address, callback) => {
     const url = 'http://api.positionstack.com/v1/forward?access_key=&query=' + address 
 
-    
     request({url: url, json: true}, (error, response) => {
         
         if (error){
@@ -21,6 +20,7 @@ const geocode = (address,callback) => {
 
             }
             catch(e){
+                console.log(chalk.yellow(e))
                 callback(chalk.redBright('Unable to fetch data from Geocode API'), undefined)
             }
         }

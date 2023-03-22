@@ -1,16 +1,27 @@
+const chalk = require('chalk')
 const geocode = require('./utils/geocode')
 const weather = require('./utils/weather')
 
-address = 'Manyata Tech Park, Bengaluru, India'
+const address = process.argv[2]
 
-geocode(address, (error, response) => {
-    if (response){
-        console.log(response)
-    }
-})
+if (address){
+    geocode(address, (error, geocode_response) => {
+        if (error){
+            return console.log(error)
+        }
+        
+        weather(geocode_response.latitude, geocode_response.longitude, (error, weather_response) => {
+            if (error){
+                return console.log(error)
+            }
+    
+            console.log(chalk.cyan(geocode_response.name))
+            console.log(chalk.cyan('It is ' + chalk.green(weather_response.condition) + ' outside and the temperature is ' + chalk.green(weather_response.temperature + '°C')))
+        })
+    }) 
+}
+else{
+    console.log(chalk.redBright('Kindly provide a valid location as an argument'))
+}
 
-weather(13.06, 77.61, (error, response) => {
-    if (response){
-        console.log(response)
-    }
-})
+
