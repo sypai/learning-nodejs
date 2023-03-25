@@ -1,11 +1,45 @@
-/* 5d5c61, 379683, 7395ae, 557a95, b11a296 */
-@import url('https://fonts.googleapis.com/css2?family=Alkatra:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;600&display=swap');
+
 body{
-    background-color: #f6fbff;
+    background-color: #EEEEEE;
+    font-family: 'Noto Sans', sans-serif;
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 0 16px;
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main{
+    flex-grow: 1;
+}
+
+.main-404 h1{
+    font-size: 32px;
+}
+
+header{
+    margin-top: 16px;
+    margin-bottom: 48px;
+}
+
+nav a{
+    color: #4D4D4D;
+    margin-right: 16px;
+    text-decoration: none;
+}
+
+footer{
+    color: #393E46;
+    border-top: 1px solid #ccc;
+    margin-top: 16px;
+    padding: 16px 0;
 }
 
 h1{
-    font-family: 'Alakatra', cursive;
-    /* font-style: italic; */
-    color: #5d5c61;
+    font-size: 64px;
+    color: #222831;
 }
+
