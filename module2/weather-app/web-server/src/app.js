@@ -51,6 +51,23 @@ app.get('/weather', (req, res) => {
     })
 })
 
+// Adding 404 Pages, using Express Wildcard character * to match any thing other than our specified routes
+app.get('/help/*', (req, res) => {
+    res.render('404', {
+        title: 'Uh huh! Nothing lives at this address.',
+        msg :'This is not the page you are looking for!Check out our help page',
+        name: 'Suyash'
+    })
+})
+
+app.get('*', (req, res) => {
+    res.render('404', {
+        title: 'Uh huh! Nothing lives at this address.',
+        msg :'This is not the page you are looking for!Check out the weather today for a location',
+        name: 'Suyash'
+    })
+})
+
 app.listen(3000, () => {
     console.log('SERVER RUNNING ON PORT 3000')
 })
