@@ -45,9 +45,17 @@ app.get('/help', (req, res) => {
 })
 
 app.get('/weather', (req, res) => {
+
+    if(!req.query.location){
+        return res.send({
+            error: 'Please enter the location you want to check the weather for!'
+        })
+    }
+
+    const location = req.query.location
     res.send({
-        'forecast': 'Cloudy',
-        'location': 'Bangalore'
+        forecast: 'Cloudy',
+        location
     })
 })
 
