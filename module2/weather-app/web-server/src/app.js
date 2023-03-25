@@ -2,6 +2,9 @@ const path = require('path')
 const express = require('express')
 const hbs = require('hbs');
 
+const geocode = require('../../web-client/utils/geocode')
+const weather = require('../../web-client/utils/weather')
+
 // Path to Static files
 const public_dir_path = path.join(__dirname, '../public')
 const views_path = path.join(__dirname, '../templates/views')
@@ -46,17 +49,37 @@ app.get('/help', (req, res) => {
 
 app.get('/weather', (req, res) => {
 
-    if(!req.query.location){
+    if(!req.query.address){
         return res.send({
             error: 'Please enter the location you want to check the weather for!'
         })
     }
 
-    const location = req.query.location
-    res.send({
-        forecast: 'Cloudy',
-        location
-    })
+    const address = req.query.address
+    
+    geocode(address, (error, { latitude, longitude, name } = {}) => {
+        
+        if (error){
+            return res.send({
+                error
+            })
+        }
+        
+        weather({latitude, longitude}, (error, {condition, temp}) => {
+            
+            if (error){
+                return res.send({
+                    error
+                })
+            }
+            
+            res.send({
+                current: "It is " + condition + " in " + name + " with a temperature " + temp + "°C",
+                name
+            })
+        })
+
+    }) 
 })
 
 // Adding 404 Pages, using Express Wildcard character * to match any thing other than our specified routes
