@@ -65,7 +65,7 @@ app.get('/weather', (req, res) => {
             })
         }
         
-        weather({latitude, longitude}, (error, {condition, temp}) => {
+        weather({latitude, longitude}, (error, {condition, temp} = {}) => {
             
             if (error){
                 return res.send({
@@ -74,8 +74,9 @@ app.get('/weather', (req, res) => {
             }
             
             res.send({
-                current: "It is " + condition + " in " + name + " with a temperature " + temp + "°C",
-                name
+                temp,
+                name,
+                condition,
             })
         })
 

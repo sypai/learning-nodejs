@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" href="/css/style.css">
+    <script src="https://kit.fontawesome.com/cfc7aaca37.js" crossorigin="anonymous"></script>
     <title>WEATHER APP</title>
     <link rel="icon" href="/img/weather.png">
 </head>
@@ -14,10 +15,30 @@
     <div class="main">
         {{> header }}
 
-        <form action="">
-            <input type="text" placeholder="Location">
-            <button>Search</button>
-        </form>
+        <p class='app-text'>
+            What's the <span id="blue">weather</span> like now?
+        </p>
+
+        <div class="wrap">
+            <form class="search">
+                <input type="text" class="searchTerm" placeholder="Location you want to check...">
+                <button type="submit" class="searchButton">
+                    <i class="fa fa-search"></i>
+                </button>
+            </form>
+        </div>
+
+        <p class="first">
+            <span id="temp-num"></span>
+            <span id="temp-unit"></span>
+            <span id="condition"></span>
+        </p>
+
+        <p class="second">
+
+        </p>
+
+
     </div>
     
     {{> footer}}
